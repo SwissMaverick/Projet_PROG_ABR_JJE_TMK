@@ -20,9 +20,11 @@ int main()
     // Déclaration variables trigo
     int     paramCote1, paramCote2;
     int     paramAngle;
+    int     choix = 0;
     double  abscisse = 0.0, oppose = 0.0, hypotenuse = 0.0;
-
-        switch (gestionMenu())
+    double  valeur = 999; //test
+    choix = gestionMenu();
+        switch (choix)
         {
         case 0:
             return 1;
@@ -137,5 +139,7 @@ int main()
 
             break;
         }
-        //fichierLogs();
+
+     //fichierLogs();
+     fonction_sauvgarde(choix, valeur);
 }

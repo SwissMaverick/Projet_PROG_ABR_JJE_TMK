@@ -51,6 +51,7 @@ int gestionMenu(void)
     return redirection_menu;
 }
 
+
 //**************************************************************                               
 // Description : Fonction pour afficher un entier en binaire 
 // avec un nombre de bits spécifié
@@ -134,7 +135,7 @@ void impressionDecimale(float valBinaire)
 //   - char input
 //   - int optionAffichage
 //************************************************************** 
-void ImpressionEtConversion(char* input, int optionAffichage)
+void impressionEtConversion(char* input, int optionAffichage)
 {
     // Convertit la chaîne de caractères en nombre flottant
     float num = atof(input);
@@ -143,13 +144,6 @@ void ImpressionEtConversion(char* input, int optionAffichage)
     if (num == (int)num)
     {
         int int_num = (int)num;
-
-        // Vérification si le nombre de bits est suffisant pour représenter l'entier
-        if (optionAffichage != 0 && optionAffichage < (int)(log2(abs(int_num)) + 1))
-        {
-            printf("Erreur : le nombre de bits spécifié est insuffisant pour représenter le nombre.\n");
-            return;
-        }
 
         // Affiche le préfixe binaire
         printf("0b ");
@@ -190,7 +184,7 @@ void conversionBinaire()
 
     // Demande à l'utilisateur de saisir une valeur décimale à convertir en binaire
     printf("\nSaisissez la valeur decimale a convertir en binaire\n\n");
-    scanf("%s", input);  // Lit la chaîne de caractères saisie par l'utilisateur
+    scanf("%19s", input);  // Lit la chaîne de caractères saisie par l'utilisateur
 
     // Boucle pour vérifier que l'option choisie est valide
     do
@@ -213,21 +207,22 @@ void conversionBinaire()
     switch (option)
     {
     case 1:
-        ImpressionEtConversion(input, 0);  // Appelle ImpressionEtConversion avec option 0 pour le nombre minimum de bits
+        impressionEtConversion(input, 0);  // Appelle impressionEtConversion avec option 0 pour le nombre minimum de bits
         break;
     case 2:
-        ImpressionEtConversion(input, 8);   // Appelle ImpressionEtConversion avec option 8 pour 8 bits
+        impressionEtConversion(input, 8);   // Appelle impressionEtConversion avec option 8 pour 8 bits
         break;
     case 3:
-        ImpressionEtConversion(input, 16);  // Appelle ImpressionEtConversion avec option 16 pour 16 bits
+        impressionEtConversion(input, 16);  // Appelle impressionEtConversion avec option 16 pour 16 bits
         break;
     case 4:
-        ImpressionEtConversion(input, 32);  // Appelle ImpressionEtConversion avec option 32 pour 32 bits
+        impressionEtConversion(input, 32);  // Appelle impressionEtConversion avec option 32 pour 32 bits
         break;
     default:
         printf("Option invalide.\n");  // Message d'erreur pour une option invalide
         break;
     }
+
 }
 
 
@@ -244,15 +239,8 @@ void conversionBinaire()
 //   - choix (permet de savoir trigo ou bin)
 //   - valeur (valeur calculé avec les fonctions de mes collègues)
 //************************************************************** 
-
-int fonction_sauvgarde(int choix, int valeur)
+void fonction_sauvgarde(int choix, double valeur)
 {
-    // Déclarations des fonctions
-    void fonction_binaire(FILE * log_file, int* compteur_binaire);
-    void fonction_trigo(FILE * log_file, int* compteur_trigo);
-    void ajouter_log(FILE * log_file, const char* message);
-    void mettre_a_jour_compteurs(const char* filename, int compteur_binaire, int compteur_trigo);
-    void lire_compteurs(const char* filename, int* compteur_binaire, int* compteur_trigo);
 
     //Paramttrage du fichier de log    
     const char* filename = "log.txt";
@@ -277,12 +265,14 @@ int fonction_sauvgarde(int choix, int valeur)
     {
         if (choix == 1)
         {
-            fonction_binaire(log_file, &compteur_binaire);
+            fonction_binaire(log_file, &compteur_binaire, valeur);
+            break;
         }
 
         if (choix == 2)
         {
-            fonction_trigo(log_file, &compteur_trigo);
+            fonction_trigo(log_file, &compteur_trigo, valeur);
+            break;
         }
 
         if (choix == 0)
@@ -302,22 +292,21 @@ int fonction_sauvgarde(int choix, int valeur)
 //**************************************************************                               
 // Description : Recuperation de la valeur à inscrire dans le
 // fichier de log de la fonction bin. 
-// (Va être modifié à l'avenir car non conforme à la donnée).
 //************************************************************** 
-void fonction_binaire(FILE* log_file, int* compteur_binaire)
+void fonction_binaire(FILE* log_file, int* compteur_binaire, double valeur)
 {
-    int valeur;
+
     (*compteur_binaire)++; // Incrémentation du compteur execution du covertisseur binaire    
        
 
     // Création du message à ajouter au log
     char message[200];
-    time_t now = time(NULL);
+    time_t now = time(NULL);  
     struct tm* t = localtime(&now);     //addition du temps local (PC)
     char date_time[100];
     strftime(date_time, sizeof(date_time), "%d.%m.%Y - %H:%M", t); //Format de dates europe
 
-    snprintf(message, sizeof(message), ".%d\n%s\nValeur entrée : %d\n", valeur, date_time, valeur);
+    snprintf(message, sizeof(message), "\n%s\nValeur calcuée (bin) : %lf\n", date_time, valeur);
 
     // Ajout du message au fichier log
     ajouter_log(log_file, message);
@@ -327,11 +316,10 @@ void fonction_binaire(FILE* log_file, int* compteur_binaire)
 //**************************************************************                               
 // Description : Recuperation de la valeur à inscrire dans le
 // fichier de log de la fonction trigo. 
-// (Va être modifié à l'avenir car non conforme à la donnée).
 //************************************************************** 
-void fonction_trigo(FILE* log_file, int* compteur_trigo)
+void fonction_trigo(FILE* log_file, int* compteur_trigo, double valeur)
 {
-    int valeur;
+
     (*compteur_trigo)++; // Incrémentation du compteur trigo
 
 
@@ -342,7 +330,7 @@ void fonction_trigo(FILE* log_file, int* compteur_trigo)
     char date_time[100];
     strftime(date_time, sizeof(date_time), "%d.%m.%Y - %H:%M", t);
 
-    snprintf(message, sizeof(message), "%d\n%s\nRésultat de l'opération : %d\n", valeur, date_time, valeur);
+    snprintf(message, sizeof(message), "\n%s\nValeur calcuée (trigo) : %lf\n", date_time, valeur);
 
     // Ajout du message au fichier log
     ajouter_log(log_file, message);

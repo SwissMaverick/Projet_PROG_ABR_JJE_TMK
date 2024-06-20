@@ -1,0 +1,36 @@
+Compteur binaire : 7
+Compteur trigo : 0
+Compteur binaire : 6
+Compteur trigo : 0
+Compteur binaire : 5
+Compteur trigo : 0
+Compteur binaire : 4
+Compteur trigo : 0
+Compteur binaire : 3
+Compteur trigo : 0
+Compteur binaire : 2
+Compteur trigo : 0
+Compteur binaire : 1
+Compteur trigo : 0
+
+20.06.2024 - 09:39
+Valeur calcu้e (bin) : 999.000000
+อออ
+20.06.2024 - 10:52
+Valeur calcu้e (bin) : 999.000000
+ออออออออ
+20.06.2024 - 11:03
+Valeur calcu้e (bin) : 999.000000
+อออออออออออออ
+20.06.2024 - 12:36
+Valeur calcu้e (bin) : 999.000000
+ออออออออออออออออออ
+20.06.2024 - 12:36
+Valeur calcu้e (bin) : 999.000000
+อออออออออออออออออออออออ
+20.06.2024 - 12:37
+Valeur calcu้e (bin) : 999.000000
+ออออออออออออออออออออออออออออ
+20.06.2024 - 12:39
+Valeur calcu้e (bin) : 999.000000
+อออออออออออออออออออออออออออออออออ

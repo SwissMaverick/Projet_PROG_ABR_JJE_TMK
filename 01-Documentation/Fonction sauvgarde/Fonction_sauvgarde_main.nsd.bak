@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.30-10" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" author="thomlynek" created="2024-06-20" changedby="thomlynek" changed="2024-06-20" origin="Structorizer 3.30-10" text="&#34;Fonction sauvgarde (main)&#34;" comment="&#34;Partie main du programme de sauvgarde de données&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;Constante (char) nom de fichier = log.txt&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Création (int) compteur fonction binaire = 0 &#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Création (int) compteur fonction trigo = 0 &#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<call text="&#34;(lire_compteur) lecture nom de fichier, compteur fonction binaire, compteur fonction trigo &#34;" comment="" color="ffff80" disabled="0"></call>
+		<call text="&#34;(fopen) ouverture du fichier log en mode ajout (a)&#34;" comment="&#34;&#34;" color="ffff80" disabled="0"></call>
+		<alternative text="&#34;si (pas de fichier log)&#34;" comment="" color="80ff80" disabled="0">
+			<qTrue>
+				<call text="&#34;Message Erreur&#34;,&#34;&#34;&#34;Erreur lors de l'ouverture du fichier log&#34;&#34;&#34;" comment="" color="ffff80" disabled="0"></call>
+				<instruction text="&#34;Fermeture du programme&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qTrue>
+			<qFalse color="ffffff">
+			</qFalse>
+		</alternative>
+		<while text="&#34;tant que (1)&#34;" comment="" color="80ffff" disabled="0">
+			<qWhile>
+				<alternative text="&#34;si (choix = 1) =&#62; compteur de fonction binaire&#34;" comment="" color="80ff80" disabled="0">
+					<qTrue>
+						<call text="&#34;(fonction_binaire) fichier log, compteur fonction binaire, valeur à sauv&#34;" comment="" color="ffff80" disabled="0"></call>
+						<instruction text="&#34;Arret&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qTrue>
+					<qFalse color="ffffff">
+					</qFalse>
+				</alternative>
+				<alternative text="&#34;si (choix = 2) =&#62; compteur de fonction trigo&#34;" comment="" color="80ff80" disabled="0">
+					<qTrue>
+						<call text="&#34;(fonction_trigo)fichier log, compteur fonction trigo, valeur à sauv&#34;" comment="" color="ffff80" disabled="0"></call>
+						<instruction text="&#34;Arret&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qTrue>
+					<qFalse color="ffffff">
+					</qFalse>
+				</alternative>
+				<alternative text="&#34;si (choix = 0) =&#62; sortie du programme&#34;" comment="" color="ffffff" disabled="0">
+					<qTrue>
+						<instruction text="&#34;Arret&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qTrue>
+					<qFalse color="ffffff">
+					</qFalse>
+				</alternative>
+			</qWhile>
+		</while>
+		<call text="&#34;(mettre_a_jour_compteur) nom de fichier, compteur fonction binaire, compteur fonctions trigo&#34;" comment="&#34;&#34;" color="ffff80" disabled="0"></call>
+		<call text="&#34;(fclose) fermeture du fichier de logs&#34;" comment="&#34;&#34;" color="ffff80" disabled="0"></call>
+	</children>
+</root>
